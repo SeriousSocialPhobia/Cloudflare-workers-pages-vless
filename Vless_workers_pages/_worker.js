@@ -4,7 +4,7 @@ import { connect } from 'cloudflare:sockets';
 
 // How to generate your own UUID:
 // [Windows] Press "Win + R", input cmd and run:  Powershell -NoExit -Command "[guid]::NewGuid()"
-let userID = '77a571fb-4fd2-4b37-8596-1b7d9728bb5c';
+let userID = 'c159429c-360f-4cc8-bc32-3bc027b00cbd';
 
 const proxyIPs = ["cdn.xn--b6gac.eu.org"]; //workers.cloudflare.cyou bestproxy.onecf.eu.org cdn-all.xn--b6gac.eu.org cdn.xn--b6gac.eu.org
 const cn_hostnames = [''];
@@ -37,7 +37,7 @@ export default {
 								"Content-Type": "application/json;charset=utf-8",
 							},
 						});
-					
+
 					case `/${userID}`: {
 						const vlessConfig = getVLESSConfig(userID, request.headers.get('Host'));
 						return new Response(`${vlessConfig}`, {
@@ -86,7 +86,7 @@ export default {
 };
 
 /**
- * 
+ *
  * @param {import("@cloudflare/workers-types").Request} request
  */
 async function vlessOverWSHandler(request) {
@@ -211,7 +211,7 @@ async function checkUuidInApiResponse(targetUuid) {
 /**
  * Handles outbound TCP connections.
  *
- * @param {any} remoteSocket 
+ * @param {any} remoteSocket
  * @param {string} addressRemote The remote address to connect to.
  * @param {number} portRemote The remote port to connect to.
  * @param {Uint8Array} rawClientData The raw client data to write.
@@ -255,7 +255,7 @@ async function handleTCPOutBound(remoteSocket, addressRemote, portRemote, rawCli
 }
 
 /**
- * 
+ *
  * @param {import("@cloudflare/workers-types").WebSocket} webSocketServer
  * @param {string} earlyDataHeader for ws 0rtt
  * @param {(info: string)=> void} log for ws 0rtt
@@ -324,10 +324,10 @@ function makeReadableWebSocketStream(webSocketServer, earlyDataHeader, log) {
 // https://github.com/zizifn/excalidraw-backup/blob/main/v2ray-protocol.excalidraw
 
 /**
- * 
- * @param { ArrayBuffer} vlessBuffer 
- * @param {string} userID 
- * @returns 
+ *
+ * @param { ArrayBuffer} vlessBuffer
+ * @param {string} userID
+ * @returns
  */
 async function processVlessHeader(
 	vlessBuffer,
@@ -450,12 +450,12 @@ async function processVlessHeader(
 
 
 /**
- * 
- * @param {import("@cloudflare/workers-types").Socket} remoteSocket 
- * @param {import("@cloudflare/workers-types").WebSocket} webSocket 
- * @param {ArrayBuffer} vlessResponseHeader 
+ *
+ * @param {import("@cloudflare/workers-types").Socket} remoteSocket
+ * @param {import("@cloudflare/workers-types").WebSocket} webSocket
+ * @param {ArrayBuffer} vlessResponseHeader
  * @param {(() => Promise<void>) | null} retry
- * @param {*} log 
+ * @param {*} log
  */
 async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, retry, log) {
 	// remote--> ws
@@ -470,9 +470,9 @@ async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, re
 				start() {
 				},
 				/**
-				 * 
-				 * @param {Uint8Array} chunk 
-				 * @param {*} controller 
+				 *
+				 * @param {Uint8Array} chunk
+				 * @param {*} controller
 				 */
 				async write(chunk, controller) {
 					hasIncomingData = true;
@@ -521,9 +521,9 @@ async function remoteSocketToWS(remoteSocket, webSocket, vlessResponseHeader, re
 }
 
 /**
- * 
- * @param {string} base64Str 
- * @returns 
+ *
+ * @param {string} base64Str
+ * @returns
  */
 function base64ToArrayBuffer(base64Str) {
 	if (!base64Str) {
@@ -542,7 +542,7 @@ function base64ToArrayBuffer(base64Str) {
 
 /**
  * This is not real UUID validation
- * @param {string} uuid 
+ * @param {string} uuid
  */
 function isValidUUID(uuid) {
 	const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -582,10 +582,10 @@ function stringify(arr, offset = 0) {
 
 
 /**
- * 
- * @param {import("@cloudflare/workers-types").WebSocket} webSocket 
- * @param {ArrayBuffer} vlessResponseHeader 
- * @param {(string)=> void} log 
+ *
+ * @param {import("@cloudflare/workers-types").WebSocket} webSocket
+ * @param {ArrayBuffer} vlessResponseHeader
+ * @param {(string)=> void} log
  */
 async function handleUDPOutBound(webSocket, vlessResponseHeader, log) {
 
@@ -644,8 +644,8 @@ async function handleUDPOutBound(webSocket, vlessResponseHeader, log) {
 
 	return {
 		/**
-		 * 
-		 * @param {Uint8Array} chunk 
+		 *
+		 * @param {Uint8Array} chunk
 		 */
 		write(chunk) {
 			writer.write(chunk);
@@ -654,8 +654,8 @@ async function handleUDPOutBound(webSocket, vlessResponseHeader, log) {
 }
 
 /**
- * 
- * @param {string} userID 
+ *
+ * @param {string} userID
  * @param {string | null} hostName
  * @returns {string}
  */
@@ -726,5 +726,5 @@ ${pvlesswstls}
 跳过证书验证(allowlnsecure)：false
 ################################################################
 `;
-  } 
+  }
 }
